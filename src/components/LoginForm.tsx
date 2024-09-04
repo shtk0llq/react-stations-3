@@ -1,7 +1,7 @@
 export const LoginForm = () => {
   return (
     <>
-      <form>
+      <form role="form">
         <div>
           <label htmlFor="email">メールアドレス</label>
           <input type="email" name="email" id="email" />
