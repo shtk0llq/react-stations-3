@@ -14,10 +14,10 @@ export const paginationSlice = createSlice({
   initialState,
   reducers: {
     next: (state) => {
-      state.value += 10;
+      state.value += 1;
     },
     prev: (state) => {
-      state.value -= 10;
+      state.value -= 1;
     },
   },
 });

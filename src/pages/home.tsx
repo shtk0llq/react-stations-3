@@ -18,7 +18,7 @@ function Home() {
   const { data, status, error } = useQuery({
     queryKey: ["books", page],
     queryFn: async () => {
-      const { data } = await axios.get<Book[]>(`/public/books?offset=${page}`);
+      const { data } = await axios.get<Book[]>(`/public/books?offset=${0 + page * 10}`);
       return data;
     },
   });
