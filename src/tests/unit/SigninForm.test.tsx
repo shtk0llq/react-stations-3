@@ -1,10 +1,16 @@
 import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { LoginForm } from "../../components/LoginForm";
+import { SigninForm } from "../../components/SigninForm";
+import { BrowserRouter } from "react-router-dom";
 
-describe(LoginForm, () => {
+describe("SigninForm", () => {
   test("ログインフォームが正しくレンダリングされるか？", () => {
-    render(<LoginForm />);
+    render(<SigninForm />);
+    // render(
+    //   <BrowserRouter>
+    //     <SigninForm />
+    //   </BrowserRouter>
+    // );
 
     const emailInput = screen.getByLabelText("メールアドレス");
     expect(emailInput).toBeInTheDocument();

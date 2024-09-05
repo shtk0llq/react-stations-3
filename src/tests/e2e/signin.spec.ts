@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Login", () => {
+test.describe("Signin", () => {
   test.beforeEach("ログインページが存在するか？", async ({ page }) => {
-    await page.goto(`/login`);
+    await page.goto(`/signin`);
   });
 
   test("メールアドレス入力フォームが存在するか？", async ({ page }) => {
