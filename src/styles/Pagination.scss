@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .pagination-container {
+    @apply flex items-center justify-center space-x-4 mt-8;
+  }
+
+  .pagination-button {
+    @apply px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+  }
+
+  .pagination-button-prev {
+    @apply text-gray-700 bg-white border border-gray-300 hover:bg-gray-50;
+  }
+
+  .pagination-button-next {
+    @apply text-white bg-blue-600 border border-transparent hover:bg-blue-700;
+  }
+}
