@@ -1,13 +1,20 @@
 import React from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
 import axios from "../api/axios";
+import { AxiosError } from "axios";
 import styles from "../styles/SigninForm.module.scss";
 
 interface Inputs {
   email: string;
   password: string;
+}
+
+type StationError = {
+  ErrorCode: number,
+  ErrorMessageJP: string,
+  ErrorMessageEN: string,
 }
 
 export const SigninForm = () => {
@@ -25,7 +32,7 @@ export const SigninForm = () => {
       const token = response.data.token;
       setCookie("token", token);
     } catch (error: unknown) {
-      setError(error.response.data.ErrorMessageJP)
+      error && setError((error as AxiosError<StationError>).response?.data?.ErrorMessageJP!)
     }
   }
 
@@ -59,7 +66,6 @@ export const SigninForm = () => {
         <button type="submit">ログイン</button>
       </div>
 
-      {/* <a href="/signup">まだアカウントをお持ちでない方</a> */}
       <Link to="/signup">まだアカウントをお持ちでない方</Link>
     </form>
   );

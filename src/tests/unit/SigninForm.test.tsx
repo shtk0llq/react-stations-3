@@ -1,16 +1,18 @@
 import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { SigninForm } from "../../components/SigninForm";
-import { BrowserRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
+
+// submit した結果が正しいものかチェックする
+// 正常ケースとエラーケースのチェックする
 
 describe("SigninForm", () => {
   test("ログインフォームが正しくレンダリングされるか？", () => {
-    render(<SigninForm />);
-    // render(
-    //   <BrowserRouter>
-    //     <SigninForm />
-    //   </BrowserRouter>
-    // );
+    render(
+      <MemoryRouter>
+        <SigninForm />
+      </MemoryRouter>
+    );
 
     const emailInput = screen.getByLabelText("メールアドレス");
     expect(emailInput).toBeInTheDocument();
