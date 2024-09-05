@@ -1,0 +1,32 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .book-review-container {
+    @apply w-96 min-w-[384px] max-w-[384px] min-h-80 max-h-80 mx-auto p-6 bg-white border rounded-lg shadow-md overflow-auto;
+  }
+
+  .book-title {
+    @apply text-2xl font-bold mb-4 text-gray-800;
+  }
+
+  .book-url {
+    @apply mb-2 font-bold text-gray-800;
+  }
+
+  .book-url a {
+    @apply text-blue-600 font-normal hover:underline truncate inline-block max-w-60 align-bottom;
+  }
+
+  .reviewer {
+    @apply mb-4 font-bold text-gray-800;
+  }
+
+  .reviewer span {
+    @apply text-gray-600 font-normal;
+  }
+
+  .review-text {
+    @apply text-gray-700 leading-relaxed line-clamp-3;
+  }
+}

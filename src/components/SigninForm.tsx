@@ -12,13 +12,17 @@ interface Inputs {
 }
 
 type StationError = {
-  ErrorCode: number,
-  ErrorMessageJP: string,
-  ErrorMessageEN: string,
-}
+  ErrorCode: number;
+  ErrorMessageJP: string;
+  ErrorMessageEN: string;
+};
 
 export const SigninForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
   const [cookies, setCookie, removeCookie] = useCookies();
   const [error, setError] = React.useState("");
 
@@ -32,12 +36,19 @@ export const SigninForm = () => {
       const token = response.data.token;
       setCookie("token", token);
     } catch (error: unknown) {
-      error && setError((error as AxiosError<StationError>).response?.data?.ErrorMessageJP!)
+      error &&
+        setError(
+          (error as AxiosError<StationError>).response?.data?.ErrorMessageJP!,
+        );
     }
-  }
+  };
 
   return (
-    <form role="form" className={styles.signup_form} onSubmit={handleSubmit(handleSignup)}>
+    <form
+      role="form"
+      className={styles.signup_form}
+      onSubmit={handleSubmit(handleSignup)}
+    >
       <div className={styles.form_group}>
         <label htmlFor="email">メールアドレス</label>
         <input
@@ -58,9 +69,7 @@ export const SigninForm = () => {
         {errors.password && <span>パスワードを入力してください</span>}
       </div>
 
-      <div className={styles.form_group}>
-        {error && <span>{error}</span>}
-      </div>
+      <div className={styles.form_group}>{error && <span>{error}</span>}</div>
 
       <div className={styles.form_group}>
         <button type="submit">ログイン</button>

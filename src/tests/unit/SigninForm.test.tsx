@@ -11,7 +11,7 @@ describe("SigninForm", () => {
     render(
       <MemoryRouter>
         <SigninForm />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     const emailInput = screen.getByLabelText("メールアドレス");
