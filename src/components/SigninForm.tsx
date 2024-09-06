@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
 import axios from "../api/axios";
@@ -35,6 +35,8 @@ export const SigninForm = () => {
 
       const token = response.data.token;
       setCookie("token", token);
+
+      redirect("/");
     } catch (error: unknown) {
       error &&
         setError(

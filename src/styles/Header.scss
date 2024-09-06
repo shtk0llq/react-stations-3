@@ -1,0 +1,45 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer components {
+  .header {
+    @apply bg-gray-800 text-white shadow-lg;
+  }
+
+  .header-container {
+    @apply container mx-auto p-4 flex items-center justify-between;
+  }
+
+  .logo-container {
+    @apply flex items-center space-x-2;
+  }
+
+  .logo-icon {
+    @apply h-8 w-8 text-blue-500;
+  }
+
+  .logo-text {
+    @apply text-xl font-bold;
+  }
+
+  .user-info {
+    @apply flex items-center space-x-3;
+  }
+
+  .user-avatar {
+    @apply h-8 w-8 rounded-full;
+  }
+
+  .user-icon {
+    @apply h-8 w-8 text-gray-300;
+  }
+
+  .user-name {
+    @apply font-medium;
+  }
+
+  .login-button {
+    @apply bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300;
+  }
+}

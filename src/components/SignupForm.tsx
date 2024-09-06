@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
 import axios from "../api/axios";
@@ -57,6 +57,8 @@ export const SignupForm = () => {
           },
         },
       );
+
+      redirect("/");
     } catch (error: unknown) {
       error &&
         setError(
