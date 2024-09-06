@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
-import { useAppDispatch } from "../stores/hooks";
+import { signout } from "../stores/authSlice";
+import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import axios from "../api/axios";
 import "../styles/Header.scss";
-import { signout } from "../stores/authSlice";
 
 export interface User {
   name: string;
@@ -12,6 +12,7 @@ export interface User {
 }
 
 const Header = () => {
+  const auth = useAppSelector((state) => state.auth.isSignin);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
@@ -50,16 +51,16 @@ const Header = () => {
         </div>
 
         <div>
-          {user ? (
+          {auth ? (
             <div className="user-info">
               <Link to="/profile">
                 <img
-                  src={user.iconUrl}
-                  alt={user.name}
+                  src={user?.iconUrl}
+                  alt={user?.name}
                   className="user-avatar"
                 />
               </Link>
-              <span className="user-name">{user.name}</span>
+              <span className="user-name">{user?.name}</span>
               <button className="logout-button" onClick={handleLogout}>
                 ログアウト
               </button>

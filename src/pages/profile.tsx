@@ -8,6 +8,8 @@ import axios from "../api/axios";
 import Header, { User } from "../components/Header";
 import "../styles/Profile.scss";
 
+// アイコン画像も変更できるようにしたら良い
+
 interface Inputs {
   name: string;
   icon: File;
