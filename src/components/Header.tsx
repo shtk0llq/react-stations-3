@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
+import { useAppDispatch } from "../stores/hooks";
 import axios from "../api/axios";
 import "../styles/Header.scss";
+import { signout } from "../stores/authSlice";
 
 export interface User {
   name: string;
@@ -10,7 +12,10 @@ export interface User {
 }
 
 const Header = () => {
-  const [cookies] = useCookies(["token"]);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const queryClient = useQueryClient();
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   const {
     data: user,
@@ -27,6 +32,13 @@ const Header = () => {
       return data;
     },
   });
+
+  const handleLogout = async function () {
+    removeCookie("token");
+    dispatch(signout());
+    queryClient.removeQueries({ queryKey: ["user"] });
+    navigate("/signin");
+  };
 
   return (
     <header className="header">
@@ -48,6 +60,9 @@ const Header = () => {
                 />
               </Link>
               <span className="user-name">{user.name}</span>
+              <button className="logout-button" onClick={handleLogout}>
+                ログアウト
+              </button>
             </div>
           ) : (
             <Link to="/signin" className="login-button">

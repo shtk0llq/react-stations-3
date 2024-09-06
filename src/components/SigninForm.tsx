@@ -1,10 +1,12 @@
 import React from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
 import axios from "../api/axios";
 import { AxiosError } from "axios";
 import styles from "../styles/SigninForm.module.scss";
+import { useAppDispatch } from "../stores/hooks";
+import { signin } from "../stores/authSlice";
 
 interface Inputs {
   email: string;
@@ -18,6 +20,8 @@ type StationError = {
 };
 
 export const SigninForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -35,8 +39,8 @@ export const SigninForm = () => {
 
       const token = response.data.token;
       setCookie("token", token);
-
-      redirect("/");
+      dispatch(signin());
+      navigate("/");
     } catch (error: unknown) {
       error &&
         setError(
