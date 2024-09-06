@@ -40,13 +40,13 @@ const Header = () => {
         <div>
           {user ? (
             <div className="user-info">
-              {user.iconUrl && (
+              <Link to="/profile">
                 <img
                   src={user.iconUrl}
                   alt={user.name}
                   className="user-avatar"
                 />
-              )}
+              </Link>
               <span className="user-name">{user.name}</span>
             </div>
           ) : (
