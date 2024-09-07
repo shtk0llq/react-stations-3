@@ -2,11 +2,11 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
-import axios from "../api/axios";
 import { AxiosError } from "axios";
-import styles from "../styles/SigninForm.module.scss";
-import { useAppDispatch } from "../stores/hooks";
-import { signin } from "../stores/authSlice";
+import { signin } from "../../stores/authSlice";
+import { useAppDispatch } from "../../stores/hooks";
+import axios from "../../api/axios";
+import "./SigninForm.scss";
 
 interface Inputs {
   email: string;
@@ -52,10 +52,10 @@ export const SigninForm = () => {
   return (
     <form
       role="form"
-      className={styles.signup_form}
+      className="signin-form"
       onSubmit={handleSubmit(handleSignup)}
     >
-      <div className={styles.form_group}>
+      <div className="form-group">
         <label htmlFor="email">メールアドレス</label>
         <input
           type="email"
@@ -65,7 +65,7 @@ export const SigninForm = () => {
         {errors.email && <span>メールアドレスを入力してください</span>}
       </div>
 
-      <div className={styles.form_group}>
+      <div className="form-group">
         <label htmlFor="password">パスワード</label>
         <input
           type="password"
@@ -75,9 +75,9 @@ export const SigninForm = () => {
         {errors.password && <span>パスワードを入力してください</span>}
       </div>
 
-      <div className={styles.form_group}>{error && <span>{error}</span>}</div>
+      {error && <div className="form-group error-message"><span>{error}</span></div>}
 
-      <div className={styles.form_group}>
+      <div className="form-group">
         <button type="submit">ログイン</button>
       </div>
 

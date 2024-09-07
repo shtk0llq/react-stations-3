@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .form-group {
+    @apply mb-6;
+
+    label {
+      @apply block mb-2 font-bold text-gray-700;
+    }
+
+    input,
+    textarea {
+      @apply w-full px-3 py-3 text-base border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
+
+      &[type="file"] {
+        @apply py-2 bg-gray-100 cursor-pointer;
+      }
+    }
+
+    span {
+      @apply block mt-1 text-sm text-red-500;
+    }
+
+    button {
+      @apply w-full py-3 px-3 bg-blue-500 text-white text-base border-none rounded-md cursor-pointer transition-colors duration-300 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300;
+    }
+
+    &:has(> span) input {
+      @apply border-red-500;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@import '../../styles/global.scss';
+
+.signup-form {
+  @apply max-w-[30rem] mx-auto my-8 p-8 bg-white rounded-lg shadow-md;
+
+  .error-message {
+    span {
+      @apply bg-red-100 p-2 rounded-md text-center;
+    }
+  }
+
+  a {
+    @apply block text-right mt-4 text-blue-600 no-underline text-sm transition-colors duration-300 ease-in-out hover:text-blue-800 hover:underline;
+  }
+}

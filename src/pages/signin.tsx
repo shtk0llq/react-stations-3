@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import { SigninForm } from "../components/SigninForm";
+import { SigninForm } from "../components/signin/SigninForm";
 
 function Signin() {
   return (

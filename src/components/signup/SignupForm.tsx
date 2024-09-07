@@ -1,10 +1,10 @@
 import React from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import { AxiosError } from "axios";
-import styles from "../styles/SignupForm.module.scss";
+import "./SignupForm.scss";
 
 interface Inputs {
   name: string;
@@ -20,12 +20,13 @@ type StationError = {
 };
 
 export const SignupForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies, setCookie] = useCookies(["token"]);
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
   const [imageFile, setImageFile] = React.useState<File | null>(null);
   const [error, setError] = React.useState("");
@@ -45,20 +46,19 @@ export const SignupForm = () => {
       const token = response.data.token;
       setCookie("token", token);
 
-      await axios.post(
-        "/uploads",
-        {
-          icon: imageFile,
-        },
-        {
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append("icon", imageFile);
+
+        await axios.post("/uploads", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
-        },
-      );
+        });
+      }
 
-      redirect("/");
+      navigate("/");
     } catch (error: unknown) {
       error &&
         setError(
@@ -75,10 +75,10 @@ export const SignupForm = () => {
   return (
     <form
       role="form"
-      className={styles.signup_form}
+      className="signup-form"
       onSubmit={handleSubmit(handleSignup)}
     >
-      <div className={styles.form_group}>
+      <div className="form-group">
         <label htmlFor="icon">アイコン</label>
         <input
           type="file"
@@ -90,42 +90,42 @@ export const SignupForm = () => {
             fileInputRef.current = e;
           }}
         />
-        {errors.icon && <span>アイコン画像を入力してください</span>}
+        {errors.icon && <span>{errors.icon.message}</span>}
       </div>
 
-      <div className={styles.form_group}>
+      <div className="form-group">
         <label htmlFor="name">名前</label>
         <input
           type="text"
           id="name"
-          {...register("name", { required: true })}
+          {...register("name", { required: "名前を入力してください" })}
         />
-        {errors.name && <span>名前を入力してください</span>}
+        {errors.name && <span>{errors.name.message}</span>}
       </div>
 
-      <div className={styles.form_group}>
+      <div className="form-group">
         <label htmlFor="email">メールアドレス</label>
         <input
           type="email"
           id="email"
-          {...register("email", { required: true })}
+          {...register("email", { required: "メールアドレスを入力してください" })}
         />
-        {errors.email && <span>メールアドレスを入力してください</span>}
+        {errors.email && <span>{errors.email.message}</span>}
       </div>
 
-      <div className={styles.form_group}>
+      <div className="form-group">
         <label htmlFor="password">パスワード</label>
         <input
           type="password"
           id="password"
-          {...register("password", { required: true })}
+          {...register("password", { required: "パスワードを入力してください" })}
         />
-        {errors.password && <span>パスワードを入力してください</span>}
+        {errors.password && <span>{errors.password.message}</span>}
       </div>
 
-      <div className={styles.form_group}>{error && <span>{error}</span>}</div>
+      {error && <div className="form-group error-message"><span>{error}</span></div>}
 
-      <div className={styles.form_group}>
+      <div className="form-group">
         <button type="submit">新規登録</button>
       </div>
 

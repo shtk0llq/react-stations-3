@@ -3,6 +3,7 @@ import { useAppSelector } from "../stores/hooks";
 import Home from "../pages/home";
 import Signup from "../pages/signup";
 import Signin from "../pages/signin";
+import New from "../pages/new";
 import Profile from "../pages/profile";
 import NotFound from "../pages/notFound";
 
@@ -21,6 +22,7 @@ function Router() {
           path="/signin"
           element={auth ? <Navigate to="/" /> : <Signin />}
         />
+        <Route path="/new" element={<New />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
