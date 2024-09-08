@@ -3,11 +3,15 @@
 
 @layer components {
   .book-review-container {
-    @apply w-96 min-w-[384px] max-w-[384px] min-h-80 max-h-80 mx-auto p-6 bg-white border rounded-lg shadow-md overflow-auto;
+    @apply w-96 min-w-[384px] max-w-[384px] h-80 mx-auto p-6 bg-white border rounded-lg shadow-md overflow-hidden relative;
+  }
+
+  .book-review-content {
+    @apply h-full overflow-y-auto pb-14;
   }
 
   .book-title {
-    @apply text-2xl font-bold mb-4 text-gray-800;
+    @apply text-2xl font-bold text-gray-800;
   }
 
   .book-url {
@@ -27,6 +31,18 @@
   }
 
   .review-text {
-    @apply text-gray-700 leading-relaxed line-clamp-3;
+    @apply text-gray-700 leading-relaxed;
+  }
+
+  .book-review-buttons {
+    @apply absolute bottom-0 right-0 p-4 bg-white w-full flex justify-end space-x-2;
+  }
+
+  .book-review-edit-button {
+    @apply px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-200;
+  }
+
+  .book-review-delete-button {
+    @apply px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-200;
   }
 }

@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useAppSelector } from "../stores/hooks";
 import NotFound from "../pages/notFound";
 import Layout from "./layout";
+import Edit from "../pages/edit";
 
 const Home = lazy(() => import("../pages/home"));
 const Signup = lazy(() => import("../pages/signup"));
@@ -29,6 +30,7 @@ function Router() {
           />
           <Route path="/new" element={<New />} />
           <Route path="/detail/:id" element={<Show />} />
+          <Route path="/edit/:id" element={<Edit />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Route>

@@ -1,0 +1,15 @@
+@import "./global.scss";
+
+.book-review-form {
+  @apply max-w-[30rem] mx-auto my-8 p-8 bg-white rounded-lg shadow-md;
+
+  .error-message {
+    span {
+      @apply bg-red-100 p-2 rounded-md text-center;
+    }
+  }
+
+  textarea {
+    @apply resize-none;
+  }
+}
