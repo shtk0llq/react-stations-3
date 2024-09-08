@@ -1,12 +1,12 @@
-import React from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form';
+import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import "../styles/Edit.scss";
-import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from '../api/axios';
-import { useCookies } from 'react-cookie';
-import { Book } from './home';
-import { AxiosError } from 'axios';
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "../api/axios";
+import { useCookies } from "react-cookie";
+import { Book } from "./home";
+import { AxiosError } from "axios";
 
 interface Inputs {
   title: string;
@@ -29,37 +29,40 @@ function Edit() {
   const { data: book } = useSuspenseQuery({
     queryKey: ["bookreview", id],
     queryFn: async () => {
-      const { data } = await axios.get<Book>(`/books/${id}`,
-        {
-          headers: {
-            "Authorization": `Bearer ${cookies["token"]}`
-          },
+      const { data } = await axios.get<Book>(`/books/${id}`, {
+        headers: {
+          Authorization: `Bearer ${cookies["token"]}`,
         },
-      );
+      });
 
       return data;
     },
   });
-  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({ defaultValues: book });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({ defaultValues: book });
   const [error, setError] = React.useState("");
 
   const handleUpdateBookReview: SubmitHandler<Inputs> = async function (data) {
     try {
-      await axios.put(`/books/${id}`, data,
-        {
-          headers: {
-            "Authorization": `Bearer ${cookies["token"]}`
-          },
+      await axios.put(`/books/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${cookies["token"]}`,
         },
-      );
+      });
 
       await queryClient.invalidateQueries({ queryKey: ["bookreview", id] });
 
       navigate("/");
     } catch (error: unknown) {
-      error && setError((error as AxiosError<StationError>).response?.data?.ErrorMessageJP!);
+      error &&
+        setError(
+          (error as AxiosError<StationError>).response?.data?.ErrorMessageJP!,
+        );
     }
-  }
+  };
 
   return (
     <div className="book-review-form">
@@ -129,7 +132,7 @@ function Edit() {
         </div>
       </form>
     </div>
-  )
+  );
 }
 
 export default Edit;

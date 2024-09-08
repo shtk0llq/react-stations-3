@@ -9,23 +9,24 @@ import { useQueryClient } from "@tanstack/react-query";
 export const BookReview = ({ book }: { book: Book }) => {
   const queryClient = useQueryClient();
   const [cookies] = useCookies(["token"]);
-  const { handleSubmit, formState: { errors } } = useForm();
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleDeleteBookReview = async function () {
     try {
-      await axios.delete(`/books/${book.id}`,
-        {
-          headers: {
-            "Authorization": `Bearer ${cookies["token"]}`,
-          },
+      await axios.delete(`/books/${book.id}`, {
+        headers: {
+          Authorization: `Bearer ${cookies["token"]}`,
         },
-      );
+      });
 
       queryClient.invalidateQueries({ queryKey: ["books"] });
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <div className="book-review-container">
@@ -45,14 +46,10 @@ export const BookReview = ({ book }: { book: Book }) => {
       {book.isMine && (
         <div className="book-review-buttons">
           <Link to={`/edit/${book.id}`}>
-            <button className="book-review-edit-button">
-              編集
-            </button>
+            <button className="book-review-edit-button">編集</button>
           </Link>
           <form onSubmit={handleSubmit(handleDeleteBookReview)}>
-            <button className="book-review-delete-button">
-              削除
-            </button>
+            <button className="book-review-delete-button">削除</button>
           </form>
         </div>
       )}

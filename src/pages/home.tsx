@@ -24,16 +24,19 @@ function Home() {
     queryKey: ["books", page, auth],
     queryFn: async () => {
       if (auth) {
-        const { data } = await axios.get<Book[]>(`/books?offset=${0 + page * 10}`,
+        const { data } = await axios.get<Book[]>(
+          `/books?offset=${0 + page * 10}`,
           {
             headers: {
-              "Authorization": `Bearer ${cookies["token"]}`
+              Authorization: `Bearer ${cookies["token"]}`,
             },
           },
         );
         return data;
       } else {
-        const { data } = await axios.get<Book[]>(`/public/books?offset=${0 + page * 10}`);
+        const { data } = await axios.get<Book[]>(
+          `/public/books?offset=${0 + page * 10}`,
+        );
         return data;
       }
     },
