@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAppSelector } from "../stores/hooks";
 import axios from "../api/axios";
-import Header from "../components/Header";
 import { BookReview } from "../components/BookReview";
 import { Pagination } from "../components/Pagination";
 
@@ -28,18 +27,14 @@ function Home() {
   });
 
   return (
-    <>
-      <Header />
-
-      <div className="px-4 py-6">
-        <div className="grid grid-cols-3 gap-x-4 gap-y-8">
-          {status === "success" &&
-            data.map((book) => <BookReview key={book.id} book={book} />)}
-        </div>
-
-        <Pagination />
+    <div className="px-4 py-6">
+      <div className="grid grid-cols-3 gap-x-4 gap-y-8">
+        {status === "success" &&
+          data.map((book) => <BookReview key={book.id} book={book} />)}
       </div>
-    </>
+
+      <Pagination />
+    </div>
   );
 }
 

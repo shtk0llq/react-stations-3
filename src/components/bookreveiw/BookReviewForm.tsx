@@ -1,10 +1,10 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useCookies } from 'react-cookie';
-import axios from '../../api/axios';
-import { AxiosError } from 'axios';
-import './BookReviewForm.scss';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useCookies } from "react-cookie";
+import axios from "../../api/axios";
+import { AxiosError } from "axios";
+import "./BookReviewForm.scss";
 
 interface BookReviewInputs {
   title: string;
@@ -22,27 +22,30 @@ type StationError = {
 export const BookReviewForm = () => {
   const [cookies] = useCookies(["token"]);
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm<BookReviewInputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<BookReviewInputs>();
   const [error, setError] = React.useState("");
 
-  const handleCreateBookReview: SubmitHandler<BookReviewInputs> = async function (data) {
-    try {
-      await axios.post("/books", data,
-        {
+  const handleCreateBookReview: SubmitHandler<BookReviewInputs> =
+    async function (data) {
+      try {
+        await axios.post("/books", data, {
           headers: {
-            "Authorization": `Bearer ${cookies["token"]}`
-          }
-        }
-      );
+            Authorization: `Bearer ${cookies["token"]}`,
+          },
+        });
 
-      navigate("/");
-    } catch (error) {
-      error &&
-        setError(
-          (error as AxiosError<StationError>).response?.data?.ErrorMessageJP!,
-        );
-    }
-  }
+        navigate("/");
+      } catch (error) {
+        error &&
+          setError(
+            (error as AxiosError<StationError>).response?.data?.ErrorMessageJP!,
+          );
+      }
+    };
 
   return (
     <div className="book-review-form">
@@ -99,13 +102,14 @@ export const BookReviewForm = () => {
           {errors.review && <span>レビューを入力してください</span>}
         </div>
 
-        {error && <div className="form-group error-message"><span>{error}</span></div>}
+        {error && (
+          <div className="form-group error-message">
+            <span>{error}</span>
+          </div>
+        )}
 
         <div className="form-group">
-          <button
-            type="submit"
-            className="submit-button"
-          >
+          <button type="submit" className="submit-button">
             作成
           </button>
         </div>

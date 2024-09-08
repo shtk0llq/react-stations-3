@@ -61,7 +61,9 @@ const Header = () => {
                 />
               </Link>
               <span className="user-name">{user?.name}</span>
-              <Link to="/new" className="create-button">レビュー作成</Link>
+              <Link to="/new" className="create-button">
+                レビュー作成
+              </Link>
               <button className="logout-button" onClick={handleLogout}>
                 ログアウト
               </button>

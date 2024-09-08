@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import axios from "../api/axios";
-import Header, { User } from "../components/Header";
+import { User } from "../components/Header";
 import "../styles/Profile.scss";
 
 // アイコン画像も変更できるようにしたら良い
@@ -108,8 +108,6 @@ function Profile() {
 
   return (
     <>
-      <Header />
-
       {user && (
         <UserForm
           user={user}

@@ -75,7 +75,11 @@ export const SigninForm = () => {
         {errors.password && <span>パスワードを入力してください</span>}
       </div>
 
-      {error && <div className="form-group error-message"><span>{error}</span></div>}
+      {error && (
+        <div className="form-group error-message">
+          <span>{error}</span>
+        </div>
+      )}
 
       <div className="form-group">
         <button type="submit">ログイン</button>

@@ -108,7 +108,9 @@ export const SignupForm = () => {
         <input
           type="email"
           id="email"
-          {...register("email", { required: "メールアドレスを入力してください" })}
+          {...register("email", {
+            required: "メールアドレスを入力してください",
+          })}
         />
         {errors.email && <span>{errors.email.message}</span>}
       </div>
@@ -118,12 +120,18 @@ export const SignupForm = () => {
         <input
           type="password"
           id="password"
-          {...register("password", { required: "パスワードを入力してください" })}
+          {...register("password", {
+            required: "パスワードを入力してください",
+          })}
         />
         {errors.password && <span>{errors.password.message}</span>}
       </div>
 
-      {error && <div className="form-group error-message"><span>{error}</span></div>}
+      {error && (
+        <div className="form-group error-message">
+          <span>{error}</span>
+        </div>
+      )}
 
       <div className="form-group">
         <button type="submit">新規登録</button>
