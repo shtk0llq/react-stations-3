@@ -47,6 +47,8 @@ export const BookReviewForm = () => {
       }
     };
 
+    // ステータスコードによるハンドリング処理を実装するのも良い
+
   return (
     <div className="book-review-form">
       <form onSubmit={handleSubmit(handleCreateBookReview)}>
